@@ -5,6 +5,8 @@
 #include <QTimer>
 #include <QMessageBox>
 
+#include <Admin_pages/AdminMainPage.h>
+
 namespace
 {
     bool isChecked = true;
@@ -41,19 +43,21 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_show_hideButton_clicked()
 {
-    QMovie *movie = nullptr;
+    if(m_movie != nullptr)
+        m_movie->deleteLater();
+
     if(isChecked)
-        movie = new QMovie(":/gifs/Resources/Gifs/show.gif");
+        m_movie = new QMovie(":/gifs/Resources/Gifs/show.gif");
     else
-        movie = new QMovie(":/gifs/Resources/Gifs/hide.gif");
+        m_movie = new QMovie(":/gifs/Resources/Gifs/hide.gif");
 
-    movie->setScaledSize(QSize(60, 45));
+    m_movie->setScaledSize(QSize(60, 45));
     QLabel *processLabel = ui->gifLabel;
-    movie->stop();
-    processLabel->setMovie(movie);
-    movie->start();
+    m_movie->stop();
+    processLabel->setMovie(m_movie);
+    m_movie->start();
 
-    QTimer::singleShot(1200, movie, SLOT(stop()));
+    QTimer::singleShot(1200, m_movie, SLOT(stop()));
 
     isChecked = !isChecked;
     ui->passwordLineEdit->setEchoMode(isChecked ? QLineEdit::Password : QLineEdit::Normal);
@@ -71,6 +75,9 @@ void MainWindow::on_logInPushButton_clicked()
     }
     else
     {
-
+        AdminMainPage *adminPage = new AdminMainPage();
+        adminPage->show();
+        this->close();
+        this->~MainWindow();
     }
 }

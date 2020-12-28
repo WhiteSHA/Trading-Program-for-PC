@@ -25,5 +25,7 @@ private:
 
 private:
     Ui::MainWindow *ui;
+
+    QMovie *m_movie = nullptr;
 };
 #endif // MAINWINDOW_H

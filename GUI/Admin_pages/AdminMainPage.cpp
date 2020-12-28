@@ -1,7 +1,9 @@
 #include "AdminMainPage.h"
 #include "ui_AdminMainPage.h"
 
-AdminMainPage::AdminMainPage(QWidget *parent) :
+#include <MainWindow.h>
+
+AdminMainPage::AdminMainPage(QMainWindow *parent) :
     QMainWindow(parent),
     ui(new Ui::AdminMainPage)
 {
@@ -11,4 +13,12 @@ AdminMainPage::AdminMainPage(QWidget *parent) :
 AdminMainPage::~AdminMainPage()
 {
     delete ui;
+}
+
+void AdminMainPage::on_logInPushButton_clicked()
+{
+    MainWindow *main = new MainWindow();
+    main->show();
+    this->close();
+    this->~AdminMainPage();
 }

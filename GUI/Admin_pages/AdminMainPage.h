@@ -12,8 +12,11 @@ class AdminMainPage : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit AdminMainPage(QWidget *parent = nullptr);
+    explicit AdminMainPage(QMainWindow *parent = nullptr);
     ~AdminMainPage();
+
+private slots:
+    void on_logInPushButton_clicked();
 
 private:
     Ui::AdminMainPage *ui;

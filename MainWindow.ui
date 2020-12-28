@@ -30,6 +30,9 @@
       <bold>true</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(39, 51, 59);</string>
+    </property>
     <property name="text">
      <string>Մուտք առևտրային ծրագիր</string>
     </property>
@@ -49,6 +52,9 @@
     <property name="toolTipDuration">
      <number>-1</number>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(39, 51, 59);</string>
+    </property>
     <property name="title">
      <string>Մուտքի տվյալներ</string>
     </property>
@@ -65,6 +71,9 @@
       <font>
        <pointsize>12</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(39, 51, 59);</string>
      </property>
      <property name="text">
       <string>Մուտքանուն</string>
@@ -87,6 +96,9 @@
        <pointsize>12</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(39, 51, 59);</string>
+     </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
@@ -104,6 +116,9 @@
       <font>
        <pointsize>12</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(39, 51, 59);</string>
      </property>
      <property name="text">
       <string>Գաղտնաբառ</string>
@@ -125,6 +140,9 @@
       <font>
        <pointsize>12</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(39, 51, 59);</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
