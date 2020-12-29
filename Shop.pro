@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,12 +18,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += Core GUI
 
 SOURCES += \
+    Core/Database/Database.cpp \
     GUI/Admin_pages/AdminMainPage.cpp \
     GUI/Cashier_pages/CashierMainPage.cpp \
     main.cpp \
     MainWindow.cpp
 
 HEADERS += \
+    Core/Database/Database.h \
+    Core/Database/Utils/DataStructs.h \
+    Core/Database/Utils/Enums.h \
     GUI/Admin_pages/AdminMainPage.h \
     GUI/Cashier_pages/CashierMainPage.h \
     MainWindow.h

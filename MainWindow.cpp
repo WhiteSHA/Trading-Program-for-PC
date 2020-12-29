@@ -63,6 +63,7 @@ void MainWindow::on_show_hideButton_clicked()
     ui->passwordLineEdit->setEchoMode(isChecked ? QLineEdit::Password : QLineEdit::Normal);
 }
 
+#include "Database/Database.h"
 void MainWindow::on_logInPushButton_clicked()
 {
     if(ui->usernameLineEdit->text().length() < 1)
@@ -72,6 +73,9 @@ void MainWindow::on_logInPushButton_clicked()
     else if(ui->passwordLineEdit->text().length() < 1)
     {
         QMessageBox::warning(this, "Մուտքի սխալ", QString::fromUtf8("Գաղտնաբառը մուտքագրված չէ"));
+        Database db;
+        int ret = db.open();
+        QMessageBox::warning(this, "Մուտքի սխալ", QString::number(ret));
     }
     else
     {

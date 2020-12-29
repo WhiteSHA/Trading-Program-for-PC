@@ -6,4 +6,7 @@
         <file>Resources/Gifs/hide.gif</file>
         <file>Resources/Gifs/show.gif</file>
     </qresource>
+    <qresource prefix="/fonts">
+        <file>Resources/fonts/GHEAGrpalatReg.otf</file>
+    </qresource>
 </RCC>
