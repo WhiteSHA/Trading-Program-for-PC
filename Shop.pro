@@ -18,16 +18,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += Core GUI
 
 SOURCES += \
+    Core/CoreGlobals.cpp \
     Core/Database/Database.cpp \
+    Core/Starter.cpp \
     GUI/Admin_pages/AdminMainPage.cpp \
     GUI/Cashier_pages/CashierMainPage.cpp \
     main.cpp \
     MainWindow.cpp
 
 HEADERS += \
+    Core/CoreGlobals.h \
     Core/Database/Database.h \
     Core/Database/Utils/DataStructs.h \
     Core/Database/Utils/Enums.h \
+    Core/Starter.h \
     GUI/Admin_pages/AdminMainPage.h \
     GUI/Cashier_pages/CashierMainPage.h \
     MainWindow.h

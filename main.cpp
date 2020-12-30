@@ -6,6 +6,7 @@
 #include <QFontDatabase>
 #include <QSettings>
 #include <winsqlite/winsqlite3.h>
+#include "CoreGlobals.h"
 
 static void setupApplication(QApplication& a)
 {
@@ -24,6 +25,8 @@ static void setupApplication(QApplication& a)
 
     // Set path to save settings
     QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope, ".");
+
+    CoreGlobals::app = &a;
 }
 
 int main(int argc, char *argv[])

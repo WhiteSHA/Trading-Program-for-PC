@@ -6,6 +6,7 @@
 #include <QMessageBox>
 
 #include <Admin_pages/AdminMainPage.h>
+#include "Starter.h"
 
 namespace
 {
@@ -21,6 +22,13 @@ MainWindow::MainWindow(QWidget *parent)
     setFixedSize(this->geometry().width(), this->geometry().height());
 
     initUi();
+
+    initStarter();
+}
+
+void MainWindow::initStarter() const
+{
+    Starter::runStarter(QThread::currentThread());
 }
 
 void MainWindow::initUi()
@@ -73,9 +81,6 @@ void MainWindow::on_logInPushButton_clicked()
     else if(ui->passwordLineEdit->text().length() < 1)
     {
         QMessageBox::warning(this, "Մուտքի սխալ", QString::fromUtf8("Գաղտնաբառը մուտքագրված չէ"));
-        Database db;
-        int ret = db.open();
-        QMessageBox::warning(this, "Մուտքի սխալ", QString::number(ret));
     }
     else
     {

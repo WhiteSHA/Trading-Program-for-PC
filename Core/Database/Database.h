@@ -21,6 +21,18 @@ public:
 
     // When DB is empty, then populate it with initial data
     bool populate();
+
+private:
+
+    //  Users API
+    bool insertUser(User *user);
+
+    bool updateUser(User* user);
+
+    bool getUser (User* users, int user_id);
+
+    bool getUsersCount(int* count);
+
 };
 
 #endif // DATABASE_H

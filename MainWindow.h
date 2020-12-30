@@ -23,6 +23,8 @@ private slots:
 private:
     void initUi();
 
+    void initStarter() const;
+
 private:
     Ui::MainWindow *ui;
 
