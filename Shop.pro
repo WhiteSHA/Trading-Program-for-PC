@@ -20,6 +20,7 @@ INCLUDEPATH += Core GUI
 SOURCES += \
     Core/CoreGlobals.cpp \
     Core/Database/Database.cpp \
+    Core/Database/Utils/StandardQueries.cpp \
     Core/Starter.cpp \
     GUI/Admin_pages/AdminMainPage.cpp \
     GUI/Cashier_pages/CashierMainPage.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     Core/Database/Database.h \
     Core/Database/Utils/DataStructs.h \
     Core/Database/Utils/Enums.h \
+    Core/Database/Utils/StandardQueries.h \
     Core/Starter.h \
     GUI/Admin_pages/AdminMainPage.h \
     GUI/Cashier_pages/CashierMainPage.h \

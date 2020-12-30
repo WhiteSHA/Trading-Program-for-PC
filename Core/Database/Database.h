@@ -12,7 +12,7 @@ public:
 
     // Public API`s (like Open, Close)
 public:
-
+    //  ***         GENERAL API         *** ///
     // Standart Open
     bool open();
 
@@ -21,6 +21,15 @@ public:
 
     // When DB is empty, then populate it with initial data
     bool populate();
+
+    //  **  // helpers
+    bool containsData();
+
+    bool dropTables();
+
+    bool createTables();
+
+    bool doStandartInserts();
 
 private:
 
