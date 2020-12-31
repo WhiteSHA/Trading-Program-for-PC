@@ -10,6 +10,18 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>500</width>
+    <height>300</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -93,11 +105,14 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(39, 51, 59);</string>
+     </property>
+     <property name="maxLength">
+      <number>65</number>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -138,11 +153,14 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(39, 51, 59);</string>
+     </property>
+     <property name="maxLength">
+      <number>65</number>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

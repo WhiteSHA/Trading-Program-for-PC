@@ -42,6 +42,7 @@ void MainWindow::initUi()
     QPixmap *temp = new QPixmap(":/gifs/Resources/Gifs/show.gif");
     *temp = temp->scaled(60, 45);
     ui->gifLabel->setPixmap(*temp);
+    delete temp;
 }
 
 MainWindow::~MainWindow()
