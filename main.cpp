@@ -5,7 +5,6 @@
 #include <QFont>
 #include <QFontDatabase>
 #include <QSettings>
-#include <winsqlite/winsqlite3.h>
 #include "CoreGlobals.h"
 
 static void setupApplication(QApplication& a)
