@@ -15,7 +15,7 @@ namespace StandardQueries
 
     const QStringList createTables =
     {
-        "CREATE TABLE users (id INT PRIMARY KEY NOT NULL,username TEXT,password TEXT,type_id INT,is_operating INT,is_active INT);",
+        "CREATE TABLE users (id INT PRIMARY KEY NOT NULL,username TEXT,password TEXT,is_admin INT,is_active INT,name TEXT, surname TEXT, address TEXT);",
         "CREATE TABLE departments (id INT PRIMARY KEY NOT NULL,name TEXT,is_operating INT,tax_type_id INT,is_active INT);",
         "CREATE TABLE user_dep (user_id INT,dep_id INT);",
         "CREATE TABLE measurement_units (id INT PRIMARY KEY NOT NULL,name TEXT);",
@@ -26,7 +26,7 @@ namespace StandardQueries
 
     const QStringList insertQueries =
     {
-        "INSERT INTO users (id,username,password,type_id,is_operating,is_active) VALUES(1,'sadmin','',1,1,1);",
+        "INSERT INTO users (id,username,password,is_admin,is_active,name,surname) VALUES(1,'sadmin','',1,1,'sadmin','sadmin');",
         "INSERT INTO measurement_units (id,name) VALUES(1,'տուփ;пакет;pack');",
         "INSERT INTO measurement_units (id,name) VALUES(2,'լիտր;литр;liter');",
         "INSERT INTO measurement_units (id,name) VALUES(3,'կգ;кг;kg');",

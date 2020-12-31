@@ -23,6 +23,7 @@ SOURCES += \
     Core/Database/Utils/StandardQueries.cpp \
     Core/Starter.cpp \
     GUI/Admin_pages/AdminMainPage.cpp \
+    GUI/Admin_pages/UsersPage.cpp \
     GUI/Cashier_pages/CashierMainPage.cpp \
     main.cpp \
     MainWindow.cpp
@@ -35,11 +36,13 @@ HEADERS += \
     Core/Database/Utils/StandardQueries.h \
     Core/Starter.h \
     GUI/Admin_pages/AdminMainPage.h \
+    GUI/Admin_pages/UsersPage.h \
     GUI/Cashier_pages/CashierMainPage.h \
     MainWindow.h
 
 FORMS += \
     GUI/Admin_pages/AdminMainPage.ui \
+    GUI/Admin_pages/UsersPage.ui \
     GUI/Cashier_pages/CashierMainPage.ui \
     MainWindow.ui
 

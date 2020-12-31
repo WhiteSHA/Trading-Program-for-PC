@@ -31,16 +31,16 @@ public:
 
     bool doStandartInserts();
 
-private:
+public:
 
     //  Users API
-    bool insertUser(User *user);
+    bool insertUser(User* user);
 
     bool updateUser(User* user);
 
-    bool getUser (User* users, int user_id);
+    bool getUser(User* user, int user_id);
 
-    bool getUsersCount(int* count);
+    bool getUsersCount(int& count);
 
 };
 

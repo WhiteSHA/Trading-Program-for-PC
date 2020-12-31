@@ -1,6 +1,7 @@
 #include "Database.h"
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSqlError>
 #include "CoreGlobals.h"
 #include "Utils/StandardQueries.h"
 
@@ -125,5 +126,62 @@ bool Database::insertUser(User *user)
 {
     Q_UNUSED(user);
 
+    return true;
+}
+
+bool Database::updateUser(User *user)
+{
+    Q_UNUSED(user);
+
+    return true;
+}
+
+bool Database::getUser(User *user, int user_id)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT * FROM users WHERE id=" + QString::number(user_id));
+    res = query.exec();
+
+    while(query.next())
+    {
+        user->id = query.value(0).toInt();
+        user->username = query.value(1).toString();
+        user->password = query.value(2).toString();
+        user->isAdmin = query.value(3).toInt();
+        user->isActiv = query.value(4).toInt();
+        user->name = query.value(5).toString();
+        user->surname = query.value(6).toString();
+        user->address = query.value(7).toString();
+
+        qDebug() << "User[" << user->id << "] data = " << user->username << " " << user->password << " "
+                 << user->isAdmin << " " << user->isActiv << " " << user->name << " " << user->surname << " "
+                 << user->address;
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in get users = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::getUsersCount(int& count)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT count(*) FROM users");
+    res = query.exec();
+
+    count = -1;
+    while(query.next())
+    {
+        count = query.value(0).toInt();
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in get users count = " << query.lastError().text();
+        return false;
+    }
     return true;
 }
