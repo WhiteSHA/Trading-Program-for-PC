@@ -124,15 +124,52 @@ bool Database::doStandartInserts()
 
 bool Database::insertUser(User *user)
 {
-    Q_UNUSED(user);
+    QSqlQuery query;
+    bool res = query.prepare("INSERT INTO users(id, username, password, is_admin, is_active, name,"
+                             " surname, address) VALUES(:id, :username, :password, :is_admin, :is_active, :name,"
+                             " :surname, :address); ");
 
+    query.bindValue(":id", user->id);
+    query.bindValue(":username", user->username);
+    query.bindValue(":password", user->password);
+    query.bindValue(":is_admin", user->isAdmin);
+    query.bindValue(":is_active", user->isActiv);
+    query.bindValue(":name", user->name);
+    query.bindValue(":surname", user->surname);
+    query.bindValue(":address", user->address);
+
+    res = query.exec();
+
+    if(!res)
+    {
+        qDebug() << "Error in get users = " << query.lastError().text();
+        return false;
+    }
     return true;
 }
 
 bool Database::updateUser(User *user)
 {
-    Q_UNUSED(user);
+    QSqlQuery query;
+    bool res = query.prepare("UPDATE users SET username=?, password=?, is_admin=?, "
+                             "is_active=?, name=?, surname=?, address=? WHERE id="
+                             + QString::number(user->id) + "; ");
 
+    query.addBindValue(user->username);
+    query.addBindValue(user->password);
+    query.addBindValue(user->isAdmin);
+    query.addBindValue(user->isActiv);
+    query.addBindValue(user->name);
+    query.addBindValue(user->surname);
+    query.addBindValue(user->address);
+
+    res = query.exec();
+
+    if(!res)
+    {
+        qDebug() << "Error in update user = " << query.lastError().text();
+        return false;
+    }
     return true;
 }
 
@@ -181,6 +218,40 @@ bool Database::getUsersCount(int& count)
     if(!res)
     {
         qDebug() << "Error in get users count = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::getLastUserId(int &last_id)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT id FROM users ORDER BY id DESC;");
+    res = query.exec();
+
+    last_id = -1;
+    while(query.next())
+    {
+        last_id = query.value(0).toInt();
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in get last user id = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::deleteUser(int user_id)
+{
+    QSqlQuery query;
+    bool res = query.prepare("DELETE FROM users WHERE id=" + QString::number(user_id));
+    res = query.exec();
+
+    if(!res)
+    {
+        qDebug() << "Error in delete user = " << query.lastError().text();
         return false;
     }
     return true;

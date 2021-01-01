@@ -42,6 +42,10 @@ public:
 
     bool getUsersCount(int& count);
 
+    bool getLastUserId(int& last_id);
+
+    bool deleteUser(int user_id);
+
 };
 
 #endif // DATABASE_H

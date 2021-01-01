@@ -3,6 +3,7 @@
 
 #include <QtGlobal>
 #include <QString>
+#include <Database/Utils/Enums.h>
 
 struct User
 {
@@ -14,6 +15,12 @@ struct User
     QString name = "";
     QString surname = "";
     QString address = "";
+};
+
+struct Action
+{
+    ActionType actionType = ActionType::TO_INSERT;
+    int id = -1;
 };
 
 #endif // DATASTRUCTS_H
