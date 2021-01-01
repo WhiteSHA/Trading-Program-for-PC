@@ -6,6 +6,7 @@
 #include <QMessageBox>
 
 #include <Admin_pages/AdminMainPage.h>
+#include <CoreGlobals.h>
 #include "Starter.h"
 
 namespace
@@ -72,7 +73,6 @@ void MainWindow::on_show_hideButton_clicked()
     ui->passwordLineEdit->setEchoMode(isChecked ? QLineEdit::Password : QLineEdit::Normal);
 }
 
-#include "Database/Database.h"
 void MainWindow::on_logInPushButton_clicked()
 {
     if(ui->usernameLineEdit->text().length() < 1)
@@ -85,9 +85,37 @@ void MainWindow::on_logInPushButton_clicked()
     }
     else
     {
-        AdminMainPage *adminPage = new AdminMainPage();
-        adminPage->show();
-        this->close();
-        this->~MainWindow();
+        User user;
+        bool res = CoreGlobals::g_database->getUserByUsername(&user, ui->usernameLineEdit->text());
+
+        if(!res)
+        {
+            QMessageBox::warning(this, "Մուտքի սխալ", QString::fromUtf8("Տվյալ օգտանունով օգտատեր չի գտնվել"));
+            return;
+        }
+
+        if(user.password != ui->passwordLineEdit->text())
+        {
+            QMessageBox::warning(this, "Մուտքի սխալ", QString::fromUtf8("Գաղտնաբառը սխալ է"));
+            return;
+        }
+
+        if(!user.isActiv)
+        {
+            QMessageBox::warning(this, "Մուտքի սխալ", QString::fromUtf8("Տվյալ օգտատերը ակտիվ չէ"));
+            return;
+        }
+
+        if(user.isAdmin)
+        {
+            AdminMainPage *adminPage = new AdminMainPage();
+            adminPage->show();
+            this->close();
+            this->~MainWindow();
+        }
+        else
+        {
+            // navigate to cashier main page
+        }
     }
 }

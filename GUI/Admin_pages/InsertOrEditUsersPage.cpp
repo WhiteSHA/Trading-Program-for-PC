@@ -8,6 +8,11 @@
 
 #include <Admin_pages/UsersPage.h>
 
+namespace
+{
+    bool isShowed = false;
+}
+
 InsertOrEditUsersPage::InsertOrEditUsersPage(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::InsertOrEditUsersPage)
@@ -38,6 +43,11 @@ void InsertOrEditUsersPage::initUI()
             ui->addressLineEdit->setText(user.address);
         }
     }
+
+    ui->show_hidePushButton->setIcon(QIcon(":/png/Resources/png/show.png"));
+    ui->show_hidePushButton->setIconSize(QSize(50,50));
+
+    ui->passwordLineEdit->setEchoMode(!isShowed ? QLineEdit::Password : QLineEdit::Normal);
 }
 
 InsertOrEditUsersPage::~InsertOrEditUsersPage()
@@ -85,6 +95,7 @@ void InsertOrEditUsersPage::on_savePushButton_clicked()
         {
             int lastId = 0;
             CoreGlobals::g_database->getLastUserId(lastId);
+            qDebug() << "Last id from DB = " << lastId;
             user.id = ++lastId;
         }
         else
@@ -114,4 +125,20 @@ void InsertOrEditUsersPage::on_savePushButton_clicked()
         else
             QMessageBox::critical(this, "Սխալ", QString::fromUtf8("Տվյալների բազայի սխալ"));
     }
+}
+
+void InsertOrEditUsersPage::on_show_hidePushButton_clicked()
+{
+    if(isShowed)
+    {
+        ui->show_hidePushButton->setIcon(QIcon(":/png/Resources/png/hide.png"));
+        ui->show_hidePushButton->setIconSize(QSize(50,50));
+    }
+    else
+    {
+        ui->show_hidePushButton->setIcon(QIcon(":/png/Resources/png/show.png"));
+        ui->show_hidePushButton->setIconSize(QSize(50,50));
+    }
+    isShowed = !isShowed;
+    ui->passwordLineEdit->setEchoMode(isShowed ? QLineEdit::Password : QLineEdit::Normal);
 }

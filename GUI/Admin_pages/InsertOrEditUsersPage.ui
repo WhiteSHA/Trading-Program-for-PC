@@ -169,7 +169,7 @@ background-color: rgb(255, 255, 255);</string>
      <rect>
       <x>380</x>
       <y>150</y>
-      <width>175</width>
+      <width>140</width>
       <height>30</height>
      </rect>
     </property>
@@ -413,6 +413,19 @@ background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Հասցե</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="show_hidePushButton">
+    <property name="geometry">
+     <rect>
+      <x>525</x>
+      <y>150</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

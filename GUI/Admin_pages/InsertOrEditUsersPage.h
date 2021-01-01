@@ -20,6 +20,8 @@ private slots:
 
     void on_savePushButton_clicked();
 
+    void on_show_hidePushButton_clicked();
+
 private:
     void initUI();
 
