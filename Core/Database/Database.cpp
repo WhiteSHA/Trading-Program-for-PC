@@ -68,15 +68,11 @@ bool Database::containsData()
 
     if (!res)
     {
-#ifdef DEBUG_UTILS
         qDebug() << "Res from get users count = " << res << "\n";
-#endif
         return false;
     }
 
-#ifdef DEBUG_UTILS
     qDebug() << "Count of tables " << count;
-#endif
 
     if (count != StandardQueries::createTables.count())
         return false;
@@ -226,7 +222,7 @@ bool Database::getUsersCount(int& count)
 bool Database::getLastUserId(int &last_id)
 {
     QSqlQuery query;
-    bool res = query.prepare("SELECT id FROM users ORDER BY id ASC;");
+    bool res = query.prepare("SELECT id FROM users ORDER BY id DESC;");
     res = query.exec();
 
     last_id = -1;
@@ -234,6 +230,7 @@ bool Database::getLastUserId(int &last_id)
     {
         last_id = query.value(0).toInt();
         qDebug() << "ids from query = " << last_id;
+        break;
     }
 
     if(!res)
