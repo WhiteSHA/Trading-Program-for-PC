@@ -26,7 +26,7 @@ namespace StandardQueries
 
     const QStringList insertQueries =
     {
-        "INSERT INTO users (id,username,password,is_admin,is_active,name,surname) VALUES(1,'sadmin','',1,1,'sadmin','sadmin');",
+        "INSERT INTO users (id,username,password,is_admin,is_active,name,surname) VALUES(1,'sadmin','1111',1,1,'sadmin','sadmin');",
         "INSERT INTO measurement_units (id,name) VALUES(1,'տուփ;пакет;pack');",
         "INSERT INTO measurement_units (id,name) VALUES(2,'լիտր;литр;liter');",
         "INSERT INTO measurement_units (id,name) VALUES(3,'կգ;кг;kg');",

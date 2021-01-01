@@ -9,4 +9,8 @@
     <qresource prefix="/fonts">
         <file>Resources/fonts/GHEAGrpalatReg.otf</file>
     </qresource>
+    <qresource prefix="/png">
+        <file>Resources/png/hide.png</file>
+        <file>Resources/png/show.png</file>
+    </qresource>
 </RCC>

@@ -226,13 +226,14 @@ bool Database::getUsersCount(int& count)
 bool Database::getLastUserId(int &last_id)
 {
     QSqlQuery query;
-    bool res = query.prepare("SELECT id FROM users ORDER BY id DESC;");
+    bool res = query.prepare("SELECT id FROM users ORDER BY id ASC;");
     res = query.exec();
 
     last_id = -1;
     while(query.next())
     {
         last_id = query.value(0).toInt();
+        qDebug() << "ids from query = " << last_id;
     }
 
     if(!res)
@@ -252,6 +253,36 @@ bool Database::deleteUser(int user_id)
     if(!res)
     {
         qDebug() << "Error in delete user = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::getUserByUsername(User* user, QString username)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT * FROM users WHERE username='" + username + "';");
+    res = query.exec();
+
+    while(query.next())
+    {
+        user->id = query.value(0).toInt();
+        user->username = query.value(1).toString();
+        user->password = query.value(2).toString();
+        user->isAdmin = query.value(3).toInt();
+        user->isActiv = query.value(4).toInt();
+        user->name = query.value(5).toString();
+        user->surname = query.value(6).toString();
+        user->address = query.value(7).toString();
+
+        qDebug() << "User[" << user->id << "] data = " << user->username << " " << user->password << " "
+                 << user->isAdmin << " " << user->isActiv << " " << user->name << " " << user->surname << " "
+                 << user->address;
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in get users = " << query.lastError().text();
         return false;
     }
     return true;

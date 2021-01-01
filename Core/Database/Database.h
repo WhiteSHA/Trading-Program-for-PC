@@ -46,6 +46,7 @@ public:
 
     bool deleteUser(int user_id);
 
+    bool getUserByUsername(User* user, QString username);
 };
 
 #endif // DATABASE_H
