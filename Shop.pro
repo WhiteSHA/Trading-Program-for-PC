@@ -2,7 +2,7 @@ QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++19
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -23,8 +23,10 @@ SOURCES += \
     Core/Database/Utils/StandardQueries.cpp \
     Core/Starter.cpp \
     GUI/Admin_pages/AdminMainPage.cpp \
+    GUI/Admin_pages/InsertOrEditUsersPage.cpp \
     GUI/Admin_pages/UsersPage.cpp \
     GUI/Cashier_pages/CashierMainPage.cpp \
+    GUI/GuiGlobals.cpp \
     main.cpp \
     MainWindow.cpp
 
@@ -36,12 +38,15 @@ HEADERS += \
     Core/Database/Utils/StandardQueries.h \
     Core/Starter.h \
     GUI/Admin_pages/AdminMainPage.h \
+    GUI/Admin_pages/InsertOrEditUsersPage.h \
     GUI/Admin_pages/UsersPage.h \
     GUI/Cashier_pages/CashierMainPage.h \
+    GUI/GuiGlobals.h \
     MainWindow.h
 
 FORMS += \
     GUI/Admin_pages/AdminMainPage.ui \
+    GUI/Admin_pages/InsertOrEditUsersPage.ui \
     GUI/Admin_pages/UsersPage.ui \
     GUI/Cashier_pages/CashierMainPage.ui \
     MainWindow.ui

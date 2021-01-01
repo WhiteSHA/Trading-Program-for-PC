@@ -21,6 +21,12 @@ public:
 private slots:
     void on_logInPushButton_clicked();
 
+    void on_changeUserPushButton_clicked();
+
+    void on_newUserPushButton_clicked();
+
+    void on_deleteUserPusButton_clicked();
+
 private:
     void initUI();
 
