@@ -47,6 +47,28 @@ public:
     bool deleteUser(int user_id);
 
     bool getUserByUsername(User* user, QString username);
+
+    //  Measurement Units API
+    bool getMeasurementUnits(MeasurementUnit* units, int& count);
+
+    bool getMeasurementUnitsCount(int& count);
+
+    bool getMeasurementUnit(MeasurementUnit* unit, int measUnitID);
+
+    //  Products API
+    bool insertProduct(Product* product);
+
+    bool updateProduct(Product product);
+
+    bool getProduct(Product* ptoduct, int prodID);
+
+    bool getProductsCount(int& count);
+
+    bool getLastProductId(int& lastID);
+
+    bool deleteProduct(int prodID);
+
+    bool deleteAllProducts();
 };
 
 #endif // DATABASE_H

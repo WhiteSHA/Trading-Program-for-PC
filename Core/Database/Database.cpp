@@ -284,3 +284,222 @@ bool Database::getUserByUsername(User* user, QString username)
     }
     return true;
 }
+
+//  Measurement Units API
+bool Database::getMeasurementUnits(MeasurementUnit* units, int& count)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT * FROM measurement_units;");
+    res = query.exec();
+
+    count = 0;
+    while(query.next())
+    {
+        units->id = query.value(0).toInt();
+        units->name = query.value(1).toString();
+
+        qDebug() << "User[" << units->id << "] data = " << units->name;
+        count++;
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in getMeasurementUnits = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::getMeasurementUnitsCount(int& count)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT count(*) FROM measurement_units;");
+    res = query.exec();
+
+    count = -1;
+    while(query.next())
+    {
+        count = query.value(0).toInt();
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in get getMeasurementUnitsCount = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::getMeasurementUnit(MeasurementUnit* unit, int measUnitID)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT * FROM measurement_units WHERE id=" + QString::number(measUnitID));
+    res = query.exec();
+
+    while(query.next())
+    {
+        unit->id = query.value(0).toInt();
+        unit->name = query.value(1).toString();
+
+        qDebug() << "User[" << unit->id << "] data = " << unit->name;
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in getMeasurementUnit = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+//  Products API
+bool Database::insertProduct(Product* product)
+{
+    QSqlQuery query;
+    bool res = query.prepare("INSERT INTO goods(id, name, code, measurement_id, price, discount,"
+                             " dep_id, adg_code) VALUES(:id, :name, :code, :measurement_id, :price, :discount,"
+                             " :dep_id, :adg_code); ");
+
+    query.bindValue(":id", product->id);
+    query.bindValue(":name", product->name);
+    query.bindValue(":code", product->code);
+    query.bindValue(":measurement_id", product->measurementUnitId);
+    query.bindValue(":price", product->price);
+    query.bindValue(":discount", product->discount);
+    query.bindValue(":dep_id", product->departmentID);
+    query.bindValue(":adg_code", product->atgaCode);
+
+    res = query.exec();
+
+    if(!res)
+    {
+        qDebug() << "Error in insertProduct = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::updateProduct(Product product)
+{
+    QSqlQuery query;
+    bool res = query.prepare("UPDATE goods name=?, code=?, measurement_id=?, price=?, discount=?,"
+                             " dep_id=?, adg_code=? WHERE id="
+                             + QString::number(product.id) + "; ");
+
+    query.addBindValue(product.name);
+    query.addBindValue(product.code);
+    query.addBindValue(product.measurementUnitId);
+    query.addBindValue(product.price);
+    query.addBindValue(product.discount);
+    query.addBindValue(product.departmentID);
+    query.addBindValue(product.atgaCode);
+
+    res = query.exec();
+
+    if(!res)
+    {
+        qDebug() << "Error in updateProduct = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::getProduct(Product* ptoduct, int prodID)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT * FROM goods WHERE id=" + QString::number(prodID));
+    res = query.exec();
+
+    while(query.next())
+    {
+        ptoduct->id = query.value(0).toInt();
+        ptoduct->name = query.value(1).toString();
+        ptoduct->code = query.value(2).toString();
+        ptoduct->measurementUnitId = query.value(3).toInt();
+        ptoduct->price = query.value(4).toInt();
+        ptoduct->discount = query.value(5).toDouble();
+        ptoduct->departmentID = query.value(6).toString();
+        ptoduct->atgaCode = query.value(7).toString();
+
+        qDebug() << "Ptoduct[" << ptoduct->id << "] data = " << ptoduct->name << " " << ptoduct->code << " "
+                 << ptoduct->measurementUnitId << " " << ptoduct->price << " " << ptoduct->discount << " " << ptoduct->departmentID << " "
+                 << ptoduct->atgaCode;
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in getProduct = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::getProductsCount(int& count)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT count(*) FROM goods;");
+    res = query.exec();
+
+    count = -1;
+    while(query.next())
+    {
+        count = query.value(0).toInt();
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in get getProductsCount = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::getLastProductId(int& lastID)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT id FROM goods ORDER BY id DESC;");
+    res = query.exec();
+
+    lastID = -1;
+    while(query.next())
+    {
+        lastID = query.value(0).toInt();
+        qDebug() << "ids from query = " << lastID;
+        break;
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in getLastProductId = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::deleteProduct(int prodID)
+{
+    QSqlQuery query;
+    bool res = query.prepare("DELETE FROM goods WHERE id=" + QString::number(prodID));
+    res = query.exec();
+
+    if(!res)
+    {
+        qDebug() << "Error in deleteProduct = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::deleteAllProducts()
+{
+    QSqlQuery query;
+    bool res = query.prepare("DELETE * FROM goods;");
+    res = query.exec();
+
+    if(!res)
+    {
+        qDebug() << "Error in deleteAllProducts = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
