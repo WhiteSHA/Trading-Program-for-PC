@@ -20,7 +20,7 @@ namespace StandardQueries
         "CREATE TABLE user_dep (user_id INT,dep_id INT);",
         "CREATE TABLE measurement_units (id INT PRIMARY KEY NOT NULL,name TEXT);",
         "CREATE TABLE product_typecodes (id INT PRIMARY KEY NOT NULL,code TEXT, name TEXT);",
-        "CREATE TABLE goods (id INT PRIMARY KEY NOT NULL, web_id INT, code TEXT,name TEXT,adg_code TEXT,price REAL,measurement_id INT,count REAL,dep_id INT,discount REAL,other_measure_name TEXT);",
+        "CREATE TABLE goods (id INT PRIMARY KEY NOT NULL, name TEXT, code TEXT, measurement_id INT, price REAL, discount REAL, dep_id INT, adg_code TEXT);",
         "CREATE TABLE coupons (id INT PRIMARY KEY NOT NULL, fiscal INT UNIQUE, time INT, type INT, ref INT, refcrn INT, rrt INT, cid INT, did INT, ta REAL, cash REAL, card REAL, partialAmount REAL, ppu REAL, with_qr REAL, saleType INT, sync INT, returned INT, items_count INT, i_id TEXT, i_gc TEXT, i_gn TEXT, i_qty TEXT, i_p TEXT, i_adg TEXT, i_mu TEXT, i_rpid TEXT, i_dsc TEXT, i_adsc TEXT, i_dsct TEXT, i_adsct TEXT, i_did TEXT, i_dt TEXT, i_dtm TEXT, i_t TEXT, i_tt TEXT, refcid INT ,tin TEXT DEFAULT \"\");"
     };
 

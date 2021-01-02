@@ -17,6 +17,24 @@ struct User
     QString address = "";
 };
 
+struct MeasurementUnit
+{
+    int id;
+    QString name;
+};
+
+struct Product
+{
+    int id;
+    QString name = "";
+    QString code = "";
+    int measurementUnitId;
+    double price = 0.0;
+    double discount = 0.0;
+    QString departmentID = "";
+    QString atgaCode = "";
+};
+
 struct Action
 {
     ActionType actionType = ActionType::TO_INSERT;
