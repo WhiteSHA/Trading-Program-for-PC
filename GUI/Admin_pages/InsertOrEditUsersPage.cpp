@@ -37,7 +37,7 @@ void InsertOrEditUsersPage::initUI()
             ui->usernameLineEdit->setText(user.username);
             ui->passwordLineEdit->setText(user.username);
             ui->typeComboBox->setCurrentIndex(user.isAdmin ? 0 : 1);
-            ui->stateComboBox->setCurrentIndex(user.isActiv ? 0 : 1);
+            ui->stateComboBox->setCurrentIndex(user.isActive ? 0 : 1);
             ui->nameLineEdit->setText(user.name);
             ui->surnameLineEdit->setText(user.surname);
             ui->addressLineEdit->setText(user.address);
@@ -104,7 +104,7 @@ void InsertOrEditUsersPage::on_savePushButton_clicked()
         user.username = ui->usernameLineEdit->text();
         user.password = ui->usernameLineEdit->text();
         user.isAdmin = ui->typeComboBox->currentIndex() ? 0 : 1;
-        user.isActiv = ui->stateComboBox->currentIndex() ? 0 : 1;
+        user.isActive = ui->stateComboBox->currentIndex() ? 0 : 1;
         user.name = ui->nameLineEdit->text();
         user.surname = ui->surnameLineEdit->text();
         user.address = ui->addressLineEdit->text();

@@ -57,7 +57,7 @@ void UsersPage::initUsersFromDB()
         label->setObjectName(QString::number(user.id));
         ui->tableWidget->setCellWidget(i - 2, 0, label);
         ui->tableWidget->setCellWidget(i - 2, 1, createComboboxOfTypes(user.isAdmin));
-        ui->tableWidget->setCellWidget(i - 2, 2, createStateCheckBox(user.isActiv));
+        ui->tableWidget->setCellWidget(i - 2, 2, createStateCheckBox(user.isActive));
         ui->tableWidget->setCellWidget(i - 2, 3, createLabelsForTable(user.name));
         ui->tableWidget->setCellWidget(i - 2, 4, createLabelsForTable(user.surname));
         ui->tableWidget->setCellWidget(i - 2, 5, createLabelsForTable(user.address));

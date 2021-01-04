@@ -100,6 +100,54 @@ color: rgb(200, 0, 0);</string>
      <string>Ելք</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="goodsPushButton">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>260</y>
+      <width>280</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(39, 51, 59);
+background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Ապրանքներ</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="sectionsPushButton">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>180</y>
+      <width>280</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(39, 51, 59);
+background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Բաժիններ</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

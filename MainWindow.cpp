@@ -100,7 +100,7 @@ void MainWindow::on_logInPushButton_clicked()
             return;
         }
 
-        if(!user.isActiv)
+        if(!user.isActive)
         {
             QMessageBox::warning(this, "Մուտքի սխալ", QString::fromUtf8("Տվյալ օգտատերը ակտիվ չէ"));
             return;
