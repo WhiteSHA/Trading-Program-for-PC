@@ -129,7 +129,7 @@ bool Database::insertUser(User *user)
     query.bindValue(":username", user->username);
     query.bindValue(":password", user->password);
     query.bindValue(":is_admin", user->isAdmin);
-    query.bindValue(":is_active", user->isActiv);
+    query.bindValue(":is_active", user->isActive);
     query.bindValue(":name", user->name);
     query.bindValue(":surname", user->surname);
     query.bindValue(":address", user->address);
@@ -154,7 +154,7 @@ bool Database::updateUser(User *user)
     query.addBindValue(user->username);
     query.addBindValue(user->password);
     query.addBindValue(user->isAdmin);
-    query.addBindValue(user->isActiv);
+    query.addBindValue(user->isActive);
     query.addBindValue(user->name);
     query.addBindValue(user->surname);
     query.addBindValue(user->address);
@@ -181,13 +181,13 @@ bool Database::getUser(User *user, int user_id)
         user->username = query.value(1).toString();
         user->password = query.value(2).toString();
         user->isAdmin = query.value(3).toInt();
-        user->isActiv = query.value(4).toInt();
+        user->isActive = query.value(4).toInt();
         user->name = query.value(5).toString();
         user->surname = query.value(6).toString();
         user->address = query.value(7).toString();
 
         qDebug() << "User[" << user->id << "] data = " << user->username << " " << user->password << " "
-                 << user->isAdmin << " " << user->isActiv << " " << user->name << " " << user->surname << " "
+                 << user->isAdmin << " " << user->isActive << " " << user->name << " " << user->surname << " "
                  << user->address;
     }
 
@@ -267,13 +267,13 @@ bool Database::getUserByUsername(User* user, QString username)
         user->username = query.value(1).toString();
         user->password = query.value(2).toString();
         user->isAdmin = query.value(3).toInt();
-        user->isActiv = query.value(4).toInt();
+        user->isActive = query.value(4).toInt();
         user->name = query.value(5).toString();
         user->surname = query.value(6).toString();
         user->address = query.value(7).toString();
 
         qDebug() << "User[" << user->id << "] data = " << user->username << " " << user->password << " "
-                 << user->isAdmin << " " << user->isActiv << " " << user->name << " " << user->surname << " "
+                 << user->isAdmin << " " << user->isActive << " " << user->name << " " << user->surname << " "
                  << user->address;
     }
 
@@ -282,6 +282,201 @@ bool Database::getUserByUsername(User* user, QString username)
         qDebug() << "Error in get users = " << query.lastError().text();
         return false;
     }
+    return true;
+}
+
+bool Database::addUserDepartment(int user_id, int dep_id)
+{
+    Department dep;
+    if(!getDepartment(&dep, dep_id))    //  if dep not exists
+        return false;
+
+    QSqlQuery query;
+    bool res = query.prepare("INSERT INTO user_dep(user_id, dep_id VALUES(:user_id, :dep_id );");
+
+    query.bindValue(":user_id", user_id);
+    query.bindValue(":dep_id", dep_id);
+
+    res = query.exec();
+
+    if(!res)
+    {
+        qDebug() << "Error in addUserDepartment = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::deleteUserDepartments(int user_id)
+{
+    QSqlQuery query;
+    bool res = query.prepare("DELETE FROM user_dep WHERE user_id=" + QString::number(user_id));
+    res = query.exec();
+
+    if(!res)
+    {
+        qDebug() << "Error in deleteUserDepartments = " << query.lastError().text();
+        return false;
+    }
+
+    return true;
+}
+
+bool Database::getUserDepartments(Department* deps, int user_id)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT * FROM user_dep WHERE user_id=" + QString::number(user_id));
+    res = query.exec();
+
+    while(query.next())
+    {
+        deps->id = query.value(0).toInt();
+        deps->name = query.value(1).toString();
+        deps->isOperating = query.value(2).toBool();
+        deps->taxTypeId = query.value(3).toInt();
+        deps->isActive = query.value(4).toInt();
+
+        qDebug() << "Department[" << deps->id << "] data = " << deps->name << " " << deps->isOperating << " "
+                 << deps->taxTypeId << " " << deps->isActive;
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in getDepartment = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+//  Departments API
+bool Database::insertDepartment(Department *dep)
+{
+    QSqlQuery query;
+    bool res = query.prepare("INSERT INTO departments(id, name, is_operating, tax_type_id, is_active)"
+                             " VALUES(:id, :name, :is_operating, :tax_type_id, :is_active );");
+
+    query.bindValue(":id", dep->id);
+    query.bindValue(":name", dep->name);
+    query.bindValue(":is_operating", dep->isOperating);
+    query.bindValue(":tax_type_id", dep->taxTypeId);
+    query.bindValue(":is_active", dep->isActive);
+
+    res = query.exec();
+
+    if(!res)
+    {
+        qDebug() << "Error in insertDepartment = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::updateDepartment(Department *dep)
+{
+    QSqlQuery query;
+    bool res = query.prepare("UPDATE departments SET name=?, is_operating=?, tax_type_id=?, "
+                             "is_active=? WHERE id="
+                             + QString::number(dep->id) + "; ");
+
+    query.addBindValue(dep->name);
+    query.addBindValue(dep->isOperating);
+    query.addBindValue(dep->taxTypeId);
+    query.addBindValue(dep->isActive);
+
+    res = query.exec();
+
+    if(!res)
+    {
+        qDebug() << "Error in updateDepartment = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::getDepartment(Department *dep, int dep_id)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT * FROM departments WHERE id=" + QString::number(dep_id));
+    res = query.exec();
+
+    while(query.next())
+    {
+        dep->id = query.value(0).toInt();
+        dep->name = query.value(1).toString();
+        dep->isOperating = query.value(2).toBool();
+        dep->taxTypeId = query.value(3).toInt();
+        dep->isActive = query.value(4).toInt();
+
+        qDebug() << "Department[" << dep->id << "] data = " << dep->name << " " << dep->isOperating << " "
+                 << dep->taxTypeId << " " << dep->isActive;
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in getDepartment = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::getDepartmentsCount(int& count)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT count(*) FROM departments");
+    res = query.exec();
+
+    count = -1;
+    while(query.next())
+    {
+        count = query.value(0).toInt();
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in getDepartmentsCount = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::getLastDepartmentId(int& last_id)
+{
+    QSqlQuery query;
+    bool res = query.prepare("SELECT id FROM departments ORDER BY id DESC;");
+    res = query.exec();
+
+    last_id = -1;
+    while(query.next())
+    {
+        last_id = query.value(0).toInt();
+        qDebug() << "ids from query = " << last_id;
+        break;
+    }
+
+    if(!res)
+    {
+        qDebug() << "Error in getLastDepartmentId = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::deleteDepartment(int dep_id)
+{
+    //  TODO    //  need to delete goods in dep_id department and disconnect cashiers from dep_id department
+//    if(!deleteDepartmentProducts(dep_id))
+//        return false;
+
+    QSqlQuery query;
+    bool res = query.prepare("DELETE FROM departments WHERE id=" + QString::number(dep_id));
+    res = query.exec();
+
+    if(!res)
+    {
+        qDebug() << "Error in deleteDepartment = " << query.lastError().text();
+        return false;
+    }
+
     return true;
 }
 
@@ -485,6 +680,20 @@ bool Database::deleteProduct(int prodID)
     if(!res)
     {
         qDebug() << "Error in deleteProduct = " << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::deleteDepartmentProducts(int depID)
+{
+    QSqlQuery query;
+    bool res = query.prepare("DELETE FROM goods WHERE dep_id=" + QString::number(depID));
+    res = query.exec();
+
+    if(!res)
+    {
+        qDebug() << "Error in deleteDepartmentProducts = " << query.lastError().text();
         return false;
     }
     return true;

@@ -48,6 +48,25 @@ public:
 
     bool getUserByUsername(User* user, QString username);
 
+    bool addUserDepartment(int user_id, int dep_id);
+
+    bool deleteUserDepartments(int user_id);
+
+    bool getUserDepartments(Department* deps, int user_id);
+
+    //  Departments API
+    bool insertDepartment(Department* dep);
+
+    bool updateDepartment(Department* dep);
+
+    bool getDepartment(Department* dep, int dep_id);
+
+    bool getDepartmentsCount(int& count);
+
+    bool getLastDepartmentId(int& last_id);
+
+    bool deleteDepartment(int dep_id);
+
     //  Measurement Units API
     bool getMeasurementUnits(MeasurementUnit* units, int& count);
 
@@ -67,6 +86,8 @@ public:
     bool getLastProductId(int& lastID);
 
     bool deleteProduct(int prodID);
+
+    bool deleteDepartmentProducts(int depID);
 
     bool deleteAllProducts();
 };
