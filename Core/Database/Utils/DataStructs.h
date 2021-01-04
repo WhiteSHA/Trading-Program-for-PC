@@ -11,10 +11,19 @@ struct User
     QString username = "";
     QString password = "";
     bool isAdmin = false;
-    bool isActiv = false;
+    bool isActive = false;
     QString name = "";
     QString surname = "";
     QString address = "";
+};
+
+struct Department
+{
+    int id;
+    QString name = "";
+    bool isOperating = false;
+    int taxTypeId = -1;
+    bool isActive = false;
 };
 
 struct MeasurementUnit
